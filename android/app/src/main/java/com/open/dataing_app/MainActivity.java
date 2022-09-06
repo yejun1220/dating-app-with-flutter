@@ -1,4 +1,4 @@
-package com.open.dataing_app;
+package com.open.dating_app;
 
 import io.flutter.embedding.android.FlutterActivity;
 

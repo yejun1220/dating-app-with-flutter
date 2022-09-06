@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.open.dataing_app">
+    package="com.open.dating_app">
    <application
-        android:label="dataing_app"
+        android:label="dating_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

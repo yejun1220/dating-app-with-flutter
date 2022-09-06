@@ -1,4 +1,4 @@
-name: dataing_app
+name: dating_app
 description: Open source of dating app written in Flutter using Firebase / Firestore
 
 # The following line prevents the package from being accidentally published to
@@ -30,17 +30,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-  eva_icons_flutter: ^3.0.2
-  flutter_screenutil: ^5.0.3
   firebase_core: ^1.11.0
   firebase_auth: ^3.3.5
-  firebase_messaging: ^12.0.1
   cloud_firestore: ^3.1.6
   google_sign_in: ^5.2.3
   google_fonts: ^3.0.1
   get: ^4.6.5
+  provider: ^6.0.3
 
   json_annotation: ^4.6.0
+  freezed_annotation: ^2.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -50,6 +49,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  freezed: ^2.1.0+1
   build_runner: ^2.2.0
   json_serializable: ^6.3.1
 
@@ -58,7 +58,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-#  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
