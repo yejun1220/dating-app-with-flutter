@@ -14,6 +14,9 @@ class Manager with _$Manager {
     required String area,
     required int ageGroup,
     required String description,
+    required String MBTI,
+    required List<String> pastTime,
+    required String course,
   }) = _Manager;
 
   factory Manager.fromJson(Map<String, dynamic> json) => _$ManagerFromJson(json);
