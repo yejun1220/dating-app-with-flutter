@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dating_app/domain/model/freeboard_info.dart';
 import 'package:dating_app/domain/model/manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseApi {
   Future<List<Manager>> getManagerListings() async {
@@ -57,6 +59,28 @@ class FirebaseApi {
     var documentRef = FirebaseFirestore.instance.collection('board').doc(id);
     await documentRef.delete();
   }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
 
 // Future<void> updateHeartFirebase() async {
 //     for (int index = 0; index < managerList.length; index++) {
