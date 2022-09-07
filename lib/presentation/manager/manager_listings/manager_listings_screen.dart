@@ -28,7 +28,7 @@ class ManagerListingsScreen extends StatelessWidget {
                 viewModel.onEvent(const ManagerListingsEvent.refreshManagerListings());
               },
               child: state.managers.isEmpty
-                  ? const Text("No Manager")
+                  ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: state.managers.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -36,7 +36,7 @@ class ManagerListingsScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const ManagerInfoScreen()),
+                              MaterialPageRoute(builder: (context) => ManagerInfoScreen(state.managers[index])),
                             );
                           },
                           child: ManagerListingsCard(manager: state.managers[index]),
