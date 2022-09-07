@@ -46,7 +46,7 @@ class ManagerListingsCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 10, color: const Color(0xff6b6b6b)),
               ),
               Text(
-                " ${manager.description.substring(0, 26)}...",
+                " ${manager.description}",
                 style: const TextStyle(fontSize: 10, color: const Color(0xff6b6b6b)),
                 overflow: TextOverflow.ellipsis,
                 // style: Theme.of(context).textTheme.bodyText2,
