@@ -22,9 +22,9 @@ class PostEditFreeBoardViewModel with ChangeNotifier {
 
   Stream<PostEditFreeBoardUiEvent> get eventController => _eventController.stream;
 
-  void onEvent(PostEditFreeboardEvent event) {
+  void onEvent(PostEditFreeBoardEvent event) {
     event.when(
-      saveFreeboard: _saveFreeBoard,
+      saveFreeBoard: _saveFreeBoard,
     );
   }
 

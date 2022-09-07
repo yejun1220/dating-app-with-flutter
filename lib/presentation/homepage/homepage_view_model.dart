@@ -17,6 +17,7 @@ class HomePageViewModel with ChangeNotifier {
     _state = _state.copyWith(
       index: index,
     );
+
     notifyListeners();
   }
 }

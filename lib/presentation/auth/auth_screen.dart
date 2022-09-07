@@ -1,4 +1,3 @@
-import 'package:dating_app/data/data_source/firebase_api.dart';
 import 'package:dating_app/presentation/auth/auth_event.dart';
 import 'package:dating_app/presentation/auth/auth_view_model.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<AuthViewModel>();
+    final state = viewModel.state;
 
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -45,14 +45,12 @@ class AuthScreen extends StatelessWidget {
                   height: 50,
                 ),
                 GestureDetector(
-                    onTap: () async {
-                      viewModel.onEvent(const AuthEvent.signInWithGoogle());
-                      // FirebaseApi api = FirebaseApi();
-                      // await api.signInWithEmailAndPassword();
-                    },
-                    child:
-                        // if (AuthController.instance.isLoading.value) return const Center(child: CircularProgressIndicator());
-                        Padding(
+                  onTap: () async {
+                    viewModel.onEvent(const AuthEvent.signInWithGoogle());
+                  },
+                  child: state.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
                           child: Container(
                             padding: const EdgeInsets.all(20),
@@ -64,7 +62,8 @@ class AuthScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )),
+                        ),
+                ),
                 const SizedBox(
                   height: 25,
                 )

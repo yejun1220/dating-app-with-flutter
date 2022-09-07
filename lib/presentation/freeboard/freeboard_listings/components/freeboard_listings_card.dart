@@ -78,7 +78,7 @@ class FreeBoardListingsCard extends StatelessWidget {
                     ],
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

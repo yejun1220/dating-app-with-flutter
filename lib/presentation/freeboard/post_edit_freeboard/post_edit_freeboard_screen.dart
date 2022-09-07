@@ -89,7 +89,7 @@ class _PostEditFreeBoardScreenState extends State<PostEditFreeBoardScreen> {
             TextButton(
               onPressed: () async {
                 viewModel.onEvent(
-                  PostEditFreeboardEvent.saveFreeboard(
+                  PostEditFreeBoardEvent.saveFreeBoard(
                     (state.freeBoardInfo == null ? null : state.freeBoardInfo!.id),
                     _titleController.text,
                     _contentController.text,
@@ -97,7 +97,7 @@ class _PostEditFreeBoardScreenState extends State<PostEditFreeBoardScreen> {
                 );
               },
               child: const Text("작성"),
-            )
+            ),
           ],
         ),
       ),

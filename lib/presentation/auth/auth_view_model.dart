@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:dating_app/domain/repository/auth_repository.dart';
 import 'package:dating_app/presentation/auth/auth_event.dart';
 import 'package:dating_app/presentation/auth/auth_state.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthViewModel with ChangeNotifier {

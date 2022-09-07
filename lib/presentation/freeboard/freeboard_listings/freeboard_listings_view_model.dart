@@ -53,6 +53,7 @@ class FreeBoardListingsViewModel with ChangeNotifier {
     _state = _state.copyWith(
       isRefreshing: true,
     );
+
     notifyListeners();
 
     final result = await _repository.getFreeBoardListings();

@@ -30,13 +30,14 @@ class FreeBoardListingsScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.black,
-              ),
-              onPressed: ()  {
-                authViewModel.onEvent(const AuthEvent.signOut());
-              })
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              authViewModel.onEvent(const AuthEvent.signOut());
+            },
+          ),
         ],
         centerTitle: true,
         backgroundColor: const Color(0xffffffff),
