@@ -1,4 +1,6 @@
 import 'package:dating_app/data/repository/freeboard_repository_impl.dart';
+import 'package:dating_app/presentation/auth/auth_event.dart';
+import 'package:dating_app/presentation/auth/auth_view_model.dart';
 import 'package:dating_app/presentation/freeboard/freeboard_listings/components/freeboard_listings_card.dart';
 import 'package:dating_app/presentation/freeboard/freeboard_listings/freeboard_listings_event.dart';
 import 'package:dating_app/presentation/freeboard/freeboard_listings/freeboard_listings_view_model.dart';
@@ -12,8 +14,9 @@ class FreeBoardListingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<FreeBoardListingsViewModel>();
-    final state = viewModel.state;
+    final freeBoardListingsViewModel = context.watch<FreeBoardListingsViewModel>();
+    final authViewModel = context.watch<AuthViewModel>();
+    final state = freeBoardListingsViewModel.state;
 
     return Scaffold(
       appBar: AppBar(
@@ -25,15 +28,25 @@ class FreeBoardListingsScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              onPressed: ()  {
+                authViewModel.onEvent(const AuthEvent.signOut());
+              })
+        ],
         centerTitle: true,
         backgroundColor: const Color(0xffffffff),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          viewModel.onEvent(const FreeBoardListingsEvent.refreshFreeBoardListings());
+          freeBoardListingsViewModel.onEvent(const FreeBoardListingsEvent.refreshFreeBoardListings());
         },
-        child: state.freeBoards.isEmpty
-            ? const Text("첫글을 작성해 보세요!")
+        child: state.isLoading
+            ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
                 shrinkWrap: true,
                 itemCount: state.freeBoards.length,
@@ -60,9 +73,8 @@ class FreeBoardListingsScreen extends StatelessWidget {
           );
 
           if (isSaved != null && isSaved) {
-            viewModel.onEvent(const FreeBoardListingsEvent.loadFreeBoardListings());
+            freeBoardListingsViewModel.onEvent(const FreeBoardListingsEvent.loadFreeBoardListings());
           }
-
         },
       ),
     );
