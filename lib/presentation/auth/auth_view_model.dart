@@ -11,14 +11,17 @@ class AuthViewModel with ChangeNotifier {
 
   var _state = const AuthState();
 
-  AuthViewModel(this._repository);
+  AuthViewModel(this._repository) {
+    _authStateChanges();
+    _getUser();
+  }
 
   AuthState get state => _state;
 
   void onEvent(AuthEvent event) {
     event.when(
       signInWithGoogle: _signInWithGoogle,
-      signOut: _signOut,
+      signOut: _signOut, getUser: _getUser,
     );
   }
 
@@ -33,7 +36,7 @@ class AuthViewModel with ChangeNotifier {
     result.when(
       success: (userCredential) {
         _state = _state.copyWith(
-          userCredential: userCredential,
+          user: userCredential.user,
           isLoading: false,
         );
       },
@@ -59,13 +62,63 @@ class AuthViewModel with ChangeNotifier {
     result.when(
       success: (s) {
         _state = _state.copyWith(
-          userCredential: null,
+          user: null,
           isLoading: false,
         );
       },
-      error: (errorMessage) {},
+      error: (errorMessage) {
+        _state = _state.copyWith(
+          isLoading: false,
+        );
+        log(errorMessage);
+      },
     );
 
     notifyListeners();
+  }
+
+  void _getUser() {
+    _state = _state.copyWith(
+      isLoading: true,
+    );
+    notifyListeners();
+
+    final result =  _repository.getUser();
+
+    result.when(
+      success: (user) {
+        _state = _state.copyWith(
+          user: user,
+          isLoading: false,
+        );
+      },
+      error: (errorMessage) {
+        _state = _state.copyWith(
+          isLoading: false,
+        );
+        log(errorMessage);
+      },
+    );
+
+    notifyListeners();
+  }
+
+  void _authStateChanges() {
+    final result =  _repository.authStateChanges();
+
+    result.when(
+      success: (authStateChanges) {
+        _state = _state.copyWith(
+          authStateChanges: authStateChanges,
+          isLoading: false,
+        );
+      },
+      error: (errorMessage) {
+        _state = _state.copyWith(
+          isLoading: false,
+        );
+        log(errorMessage);
+      },
+    );
   }
 }

@@ -6,4 +6,5 @@ part 'auth_event.freezed.dart';
 abstract class AuthEvent with _$AuthEvent {
   const factory AuthEvent.signInWithGoogle() = SignInWithGoogle;
   const factory AuthEvent.signOut() = SignOut;
+  const factory AuthEvent.getUser() = GetUser;
 }

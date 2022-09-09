@@ -1,8 +1,7 @@
+import 'package:dating_app/data/data_source/firebase_api.dart';
 import 'package:dating_app/domain/repository/auth_repository.dart';
 import 'package:dating_app/util/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../data_source/firebase_api.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseApi _firebaseApi;
@@ -29,5 +28,26 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Result<User?> getUser() {
+   try {
+     final result = _firebaseApi.getUser();
+     return Result.success(result);
+   }
+   catch (e) {
+     return Result.error('유저 가져오기 실패: $e');
+   }
+  }
+
+  @override
+  Result<Stream<User?>> authStateChanges() {
+    try {
+      final result = _firebaseApi.authStateChanges();
+      return Result.success(result);
+    }
+    catch (e) {
+      return Result.error('인증 변환 감지 실패: $e');
+    }
+  }
 
 }

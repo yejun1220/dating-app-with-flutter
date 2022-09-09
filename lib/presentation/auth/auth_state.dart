@@ -6,7 +6,8 @@ part 'auth_state.freezed.dart';
 @freezed
 class AuthState with _$AuthState {
   const factory AuthState({
-    UserCredential? userCredential,
+    User? user,
     @Default(false) bool isLoading,
+    Stream<User?>? authStateChanges,
   }) = _AuthState;
 }
