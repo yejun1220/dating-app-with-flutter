@@ -1,5 +1,9 @@
+import 'package:dating_app/data/repository/in_chat_repository_impl.dart';
 import 'package:dating_app/domain/model/manager.dart';
+import 'package:dating_app/presentation/chat/in_chat/in_chat_screen.dart';
+import 'package:dating_app/presentation/chat/in_chat/in_chat_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ManagerInfoScreen extends StatelessWidget {
   final Manager manager;
@@ -182,7 +186,18 @@ class ManagerInfoScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                   child: InkWell(
                     onTap: () {
-                      // TODO : 채팅 연결 구현해야 함.
+                      final repository = context.read<ChatRepositoryImpl>();
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ChangeNotifierProvider(
+                                create: (_) => InChatViewModel(repository, manager.id, manager.userName, manager.photoURL, manager.area),
+                            child: const InChatScreen(),
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 76,
@@ -236,8 +251,7 @@ class ManagerInfoScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: const Color(0xff93e3e6), style: BorderStyle.solid, width: 2),
                       ),
-                      child:
-                          Icon(
+                      child: Icon(
                         Icons.favorite_border_outlined,
                         color: Colors.red[500],
                         size: 27,
