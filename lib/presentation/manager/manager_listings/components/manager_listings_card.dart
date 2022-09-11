@@ -39,15 +39,15 @@ class ManagerListingsCard extends StatelessWidget {
               ),
               Text(
                 " ${manager.area} - ",
-                style: const TextStyle(fontSize: 10, color: const Color(0xff6b6b6b)),
+                style: const TextStyle(fontSize: 10, color: Color(0xff6b6b6b)),
               ),
               Text(
                 " ${manager.ageGroup}대",
-                style: const TextStyle(fontSize: 10, color: const Color(0xff6b6b6b)),
+                style: const TextStyle(fontSize: 10, color: Color(0xff6b6b6b)),
               ),
               Text(
                 " ${manager.description}",
-                style: const TextStyle(fontSize: 10, color: const Color(0xff6b6b6b)),
+                style: const TextStyle(fontSize: 10, color: Color(0xff6b6b6b)),
                 overflow: TextOverflow.ellipsis,
                 // style: Theme.of(context).textTheme.bodyText2,
               ),

@@ -2,7 +2,6 @@ import 'package:dating_app/domain/model/manager.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'manager_listings_state.freezed.dart';
-
 part 'manager_listings_state.g.dart';
 
 @freezed

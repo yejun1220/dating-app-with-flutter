@@ -15,10 +15,16 @@ class ManagerListingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        title: const Text(
+          "매니저 목록",
+          style: TextStyle(
+            color: Color(0xff324755),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        backgroundColor: Colors.white,
+        centerTitle: true,
+        backgroundColor: const Color(0xffffffff),
       ),
       body: Column(
         children: [
