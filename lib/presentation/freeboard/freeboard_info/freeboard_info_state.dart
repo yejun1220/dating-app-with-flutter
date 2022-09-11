@@ -2,7 +2,6 @@ import 'package:dating_app/domain/model/freeboard_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'freeboard_info_state.freezed.dart';
-
 part 'freeboard_info_state.g.dart';
 
 @freezed

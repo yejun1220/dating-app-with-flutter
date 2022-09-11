@@ -1,3 +1,4 @@
+import 'package:dating_app/presentation/auth/auth_view_model.dart';
 import 'package:dating_app/presentation/freeboard/post_edit_freeboard/post_edit_freeboard_event.dart';
 import 'package:dating_app/presentation/freeboard/post_edit_freeboard/post_edit_freeboard_view_model.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _PostEditFreeBoardScreenState extends State<PostEditFreeBoardScreen> {
     Future.microtask(() {
       final viewModel = context.read<PostEditFreeBoardViewModel>();
       final state = viewModel.state;
-      // TODO : 수정 스크린 수정시 작성
+
       if (state.freeBoardInfo?.id != null) {
         _titleController.text = state.freeBoardInfo!.title;
         _contentController.text = state.freeBoardInfo!.content;
@@ -93,6 +94,7 @@ class _PostEditFreeBoardScreenState extends State<PostEditFreeBoardScreen> {
                     (state.freeBoardInfo == null ? null : state.freeBoardInfo!.id),
                     _titleController.text,
                     _contentController.text,
+                    context.read<AuthViewModel>().state.user!.displayName!,
                   ),
                 );
               },

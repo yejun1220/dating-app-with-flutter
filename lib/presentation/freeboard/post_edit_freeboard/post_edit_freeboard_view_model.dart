@@ -28,7 +28,7 @@ class PostEditFreeBoardViewModel with ChangeNotifier {
     );
   }
 
-  Future<void> _saveFreeBoard(String? id, String title, String content) async {
+  Future<void> _saveFreeBoard(String? id, String title, String content, String userName) async {
     if (title.isEmpty || content.isEmpty) {
       _eventController.add(const PostEditFreeBoardUiEvent.showSnackBar('제목이나 내용이 비어있습니다.'));
       return;
@@ -40,7 +40,7 @@ class PostEditFreeBoardViewModel with ChangeNotifier {
           title: title,
           content: content,
           // TODO : Auth 연동 시 userName 넘겨줘야 함. AuthController.instance.authentication.currentUser!.displayName
-          userName: '',
+          userName: userName,
           timestamp: DateTime.now().millisecondsSinceEpoch,
           isPressedList: [],
           comments: 0,
