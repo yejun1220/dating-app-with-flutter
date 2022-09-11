@@ -1,3 +1,4 @@
+import 'package:dating_app/presentation/chat/chat_listings/chat_list_screen.dart';
 import 'package:dating_app/presentation/freeboard/freeboard_listings/freeboard_listings_screen.dart';
 import 'package:dating_app/presentation/manager/manager_listings/manager_listings_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ part 'homepage_state.freezed.dart';
 class HomePageState with _$HomePageState {
   const factory HomePageState({
     @Default(0) int index,
-    @Default([ManagerListingsScreen(), FreeBoardListingsScreen()]) List<StatelessWidget> pageOptions,
+    @Default([ManagerListingsScreen(), FreeBoardListingsScreen(), ChatListingsScreen()]) List<Widget> pageOptions,
   }) = _HomePageState;
 
 }

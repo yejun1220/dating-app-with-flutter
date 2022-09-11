@@ -16,7 +16,8 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.departure_board), label: "FreeBoard")
+          BottomNavigationBarItem(icon: Icon(Icons.article), label: "FreeBoard"),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
         ],
 
         currentIndex: state.index,
