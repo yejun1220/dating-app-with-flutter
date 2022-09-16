@@ -1,9 +1,12 @@
 import 'package:dating_app/data/data_source/firebase_api.dart';
 import 'package:dating_app/data/repository/auth_repository_impl.dart';
 import 'package:dating_app/data/repository/freeboard_repository_impl.dart';
+import 'package:dating_app/data/repository/in_chat_repository_impl.dart';
 import 'package:dating_app/data/repository/manager_repository_impl.dart';
 import 'package:dating_app/presentation/auth/auth_screen.dart';
 import 'package:dating_app/presentation/auth/auth_view_model.dart';
+import 'package:dating_app/presentation/chat/chat_listings/client_chat_listings/client_chat_listings_view_model.dart';
+import 'package:dating_app/presentation/chat/in_chat/messages/messages_view_model.dart';
 import 'package:dating_app/presentation/freeboard/freeboard_listings/freeboard_listings_view_model.dart';
 import 'package:dating_app/presentation/homepage/homepage_screen.dart';
 import 'package:dating_app/presentation/homepage/homepage_view_model.dart';
@@ -22,11 +25,8 @@ void main() async {
         Provider(
           create: (_) => FreeBoardRepositoryImpl(FirebaseApi()),
         ),
-        ChangeNotifierProvider(
-          create: (_) => ManagerListingsViewModel(ManagerRepositoryImpl(FirebaseApi())),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => FreeBoardListingsViewModel(FreeBoardRepositoryImpl(FirebaseApi())),
+        Provider(
+          create: (_) => ChatRepositoryImpl(FirebaseApi()),
         ),
         ChangeNotifierProvider(
           create: (_) => AuthViewModel(AuthRepositoryImpl(FirebaseApi())),
@@ -34,11 +34,22 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => HomePageViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ManagerListingsViewModel(ManagerRepositoryImpl(FirebaseApi())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FreeBoardListingsViewModel(FreeBoardRepositoryImpl(FirebaseApi())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MessagesViewModel(ChatRepositoryImpl(FirebaseApi())),
+        ),
         StreamProvider<User?>(
-          create: (_) => FirebaseAuth.instance.authStateChanges(),
-          initialData: FirebaseAuth.instance.currentUser,
-          child: const MyApp(),
-        )
+          create: (_) => AuthViewModel(AuthRepositoryImpl(FirebaseApi())).state.authStateChanges,
+          initialData: AuthViewModel(AuthRepositoryImpl(FirebaseApi())).state.user,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ClientChatListingsViewModel(ChatRepositoryImpl(FirebaseApi()), AuthViewModel(AuthRepositoryImpl(FirebaseApi())).state.user?.uid),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -60,5 +71,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
